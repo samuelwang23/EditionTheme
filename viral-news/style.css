@@ -2388,6 +2388,8 @@ object {
 .vn-carousel-block[data-count="6"] .vn-post-item h3{
     font-size: 14px;
 }
+
+
 /*--------------------------------------------------------------
 ## Footer
 --------------------------------------------------------------*/
@@ -3027,4 +3029,5 @@ object {
     .vn-main-navigation .vn-menu{
         display: block !important;
     }
+    
 }

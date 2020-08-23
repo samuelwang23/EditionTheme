@@ -6,7 +6,7 @@ get_header();
 ?>
 
 <div class="vn-container vn-clearfix">
-
+	
     <div id="primary" class="content-area">
         <header class="vn-main-header">
             <h1><?php printf(esc_html__('Search Results for: %s', 'viral-news'), '<span>' . get_search_query() . '</span>'); ?></h1>

@@ -16,7 +16,6 @@ add_action('viral_news_carousel_section', 'viral_news_carousel_section');
 
 
 if (!function_exists('viral_news_top_section_style1')) {
-
     function viral_news_top_section_style1($args) {
         $title = $args['title'];
         $layout = $args['layout'];
@@ -86,19 +85,24 @@ if (!function_exists('viral_news_top_section_style1')) {
 }
 
 if (!function_exists('viral_news_top_section_style2')) {
-
+	
     function viral_news_top_section_style2($args) {
+		$page = $_SERVER['PHP_SELF'];
+		$sec = "10";
+		
         $title = $args['title'];
         $layout = $args['layout'];
         $cat = $args['cat'];
         if ($layout != 'style2')
             return;
         ?>
+		
         <div class="vn-top-block <?php echo esc_attr($layout); ?>">
             <?php if ($title) { ?>
                 <h2 class="vn-block-title"><span><?php echo esc_html($title); ?></span></h2>
             <?php } ?>
             <div class="vn-top-block-wrap">
+				
                 <?php
                 $args = array(
                     'cat' => $cat,
@@ -141,11 +145,14 @@ if (!function_exists('viral_news_top_section_style2')) {
                             }
                             ?>
                         </div>
-
                         <div class="vn-post-content">
                             <h3 class="vn-post-title <?php echo esc_attr($title_class) ?>"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <?php viral_news_post_date(); ?>
-
+                            <?php $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author())); 
+								  echo $author. " ";
+								  echo viral_news_post_date_no_div();								  
+							?>
+							 				
+							
                             <?php if ($index == 1) { ?>
                                 <div class="vn-excerpt">
                                     <?php echo viral_news_excerpt(get_the_content(), 200); ?>
@@ -170,6 +177,7 @@ if (!function_exists('viral_news_top_section_style2')) {
 if (!function_exists('viral_news_top_section_style3')) {
 
     function viral_news_top_section_style3($args) {
+		
         $title = $args['title'];
         $layout = $args['layout'];
         $cat = $args['cat'];
@@ -177,6 +185,7 @@ if (!function_exists('viral_news_top_section_style3')) {
             return;
         ?>
         <div class="vn-top-block <?php echo esc_attr($layout); ?>">
+			
             <?php if ($title) { ?>
                 <h2 class="vn-block-title"><span><?php echo esc_html($title); ?></span></h2>
             <?php } ?>
@@ -931,6 +940,7 @@ if (!function_exists('viral_news_carousel_section')) {
                                         $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'viral-news-600x600');
                                         ?>
                                         <img alt="<?php echo the_title_attribute() ?>" src="<?php echo esc_url($image[0]) ?>">
+									
                                     <?php }
                                     ?>
                                 </div>
@@ -939,7 +949,11 @@ if (!function_exists('viral_news_carousel_section')) {
 
                         <div class="vn-post-content">
                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <?php echo viral_news_post_date(); ?>
+							<?php $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author())); 
+								  echo $author. "<br> ";
+								  echo viral_news_post_date_no_div();								  
+							?>
+                            <?php //echo viral_news_post_date(); ?>
                         </div>
                     </div>
                     <?php

@@ -14,13 +14,13 @@ get_header();
         if (!$viral_news_hide_title) {
             ?>
             <header class="vn-main-header">
+			
                 <?php the_title('<h1>', '</h1>'); ?>
             </header><!-- .entry-header -->
         <?php } ?>
 
         <div class="vn-content-wrap vn-clearfix">
             <div id="primary" class="content-area">
-
                 <?php get_template_part('template-parts/content', 'page'); ?>
 
                 <?php

@@ -15,7 +15,6 @@ if (!function_exists('viral_news_posted_on')) :
     function viral_news_posted_on() {
 
         $posted_on = sprintf('<span class="vn-day">%1$s</span><span class="vn-month">%2$s</span>', esc_html(get_the_date('j')), esc_attr(get_the_date('M')));
-
         $avatar = get_avatar(get_the_author_meta('ID'), 48);
 
         $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author()));
@@ -51,6 +50,45 @@ if (!function_exists('viral_news_post_date')) :
         );
 
         echo '<div class="posted-on"><i class="mdi mdi-clock-time-three-outline"></i>' . $posted_on . '</div>'; // WPCS: XSS OK.
+    }
+
+endif;
+
+if (!function_exists('viral_news_post_date_no_div')) :
+
+    /**
+     * Prints HTML with meta information for the current post-date/time and author.
+     */
+    function viral_news_post_date_no_div() {
+        $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+        if (get_the_time('U') !== get_the_modified_time('U')) {
+            $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+        }
+
+        $posted_on = sprintf($time_string, esc_attr(get_the_date('c')), esc_html(get_the_date()), esc_attr(get_the_modified_date('c')), esc_html(get_the_modified_date())
+        );
+
+        echo '<i class="mdi mdi-clock-time-three-outline"></i>' . $posted_on; // WPCS: XSS OK.
+    }
+
+endif;
+
+if (!function_exists('viral_news_post_date_raw')) :
+
+    /**
+     * Prints HTML with meta information for the current post-date/time and author.
+     */
+    function viral_news_post_date_raw() {
+        $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+        if (get_the_time('U') !== get_the_modified_time('U')) {
+            $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+        }
+
+        $posted_on = sprintf($time_string, esc_attr(get_the_date('c')), esc_html(get_the_date()), esc_attr(get_the_modified_date('c')), esc_html(get_the_modified_date())
+        );
+
+        //echo '' . $posted_on . ''; // WPCS: XSS OK.
+        return ' <i class="mdi mdi-clock-time-three-outline"></i>'.$posted_on;
     }
 
 endif;
