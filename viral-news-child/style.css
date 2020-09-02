@@ -31,3 +31,9 @@
         margin: 0 !important;
     }
 }
+.sw-link{
+    color: #404040;
+}
+.sw-link:hover{
+    color: #dd3333;
+}

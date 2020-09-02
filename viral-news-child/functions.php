@@ -104,7 +104,7 @@ if (!function_exists('viral_news_carousel_section')) {
         ?>
         <div class="vn-carousel-block" data-count="<?php echo esc_attr($slide_no); ?>">
             <?php if ($title) { ?>
-                <h2 class="vn-block-title"><span><?php echo esc_html($title); ?></span></h2>
+                <h2 class="vn-block-title"><a class="sw-link" href = "<?php echo get_category_link($cat);?>"><span><strong><?php echo esc_html($title); ?></span></strong></a></h2>
             <?php } ?>
 
             <div class="vn-carousel-block-wrap owl-carousel">
@@ -133,9 +133,14 @@ if (!function_exists('viral_news_carousel_section')) {
                                 </div>
                             </a>
                         </div>
-
                         <div class="vn-post-content">
                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                            
+                            
+                           
+                            
+                            
+                            
 							<?php $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author())); 
 								  echo $author. "<br> ";
 								  echo viral_news_post_date_no_div();								  
