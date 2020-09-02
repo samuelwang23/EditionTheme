@@ -1,0 +1,33 @@
+/*
+ Theme Name:   Viral News Child
+ Theme URI:    http://example.com/viral-news-child/
+ Description:  Viral News Child Theme
+ Author:       Samuel Wang
+ Author URI:   http://example.com
+ Template:     viral-news
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  twentyfifteenchild
+*/
+
+.author-content{
+    width:70% !important;
+    margin-left:15% !important;
+    margin-right:15% !important;
+    
+}
+.sw-content{
+    width:60% !important;
+    margin-left:20% !important;
+    margin-right:20% !important;
+    
+}
+
+@media screen and (max-width: 1200px){
+    .author-content, .sw-content{
+        width:100% !important;
+        margin: 0 !important;
+    }
+}
