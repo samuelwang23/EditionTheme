@@ -13,7 +13,16 @@ get_header();
         ?>
     <?php echo get_avatar($curauth->id);?>
     <h1><strong></strong><?php echo get_the_author_meta($field = 'display_name')?></strong></h1>
-    <h4><?php echo get_the_author_meta($field = 'description'); ?></h4>
+    <h4><?php 
+    $bio = get_the_author_meta($field = 'description');
+    if(strpos($bio, "font")){
+        $start = strpos($bio, '<span') + 28;
+        $font = str_replace (" ", "+", substr($bio, $start + 1, strpos($bio, ';', $start) - $start - 2 ));
+        echo "<link href='https://fonts.googleapis.com/css2?family=".$font."&display=swap' rel='stylesheet'>";
+    }
+    
+
+    echo $bio; ?></h4>
     </header><!-- .vn-main-header -->
     <hr>
     <div class="vn-content-wrap vn-clearfix" >

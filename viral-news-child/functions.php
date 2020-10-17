@@ -67,12 +67,23 @@ if (!function_exists('viral_news_top_section_style2')) {
                             ?>
                         </div>
                         <div class="vn-post-content">
-                            <h3 class="vn-post-title <?php echo esc_attr($title_class) ?>"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <?php $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author())); 
-								  echo $author. " ";
-								  echo viral_news_post_date_no_div();								  
+                            <h3 class="vn-post-title <?php echo esc_attr($title_class) ?>"><a href="<?php the_permalink(); ?>" class = "sw-title" style = "font-family: 'Oswald';text-transform: Uppercase;  <?php 
+                            if($index != 1){
+                                echo "font-size: 20px"; 
+                            }
+                            ?>"><?php the_title(); ?></a></h3>
+                            <span class = 'sw-author'>
+                            <?php 
+                                ob_start();
+                                coauthors();
+                                $coauthors = ob_get_contents();                                    
+                                ob_end_clean();
+                                $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html($coauthors)); 
+                                echo $author. "<br> ";
+                                echo viral_news_post_date_no_div();		
 							?>
-							 				
+							</span>
+							
 							
                             <?php if ($index == 1) { ?>
                                 <div class="vn-excerpt">
@@ -134,17 +145,24 @@ if (!function_exists('viral_news_carousel_section')) {
                             </a>
                         </div>
                         <div class="vn-post-content">
-                            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                            <h3><a href="<?php the_permalink(); ?>" class = "sw-title"  style = "font-family: 'Oswald';text-transform: Uppercase; font-size: 20px;"><?php the_title(); ?></a></h3>
                             
                             
                            
                             
                             
-                            
-							<?php $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author())); 
-								  echo $author. "<br> ";
-								  echo viral_news_post_date_no_div();								  
+                            <span class = "sw-author">
+                            <?php 
+                                    ob_start();
+                                    coauthors();
+                                    $coauthors = ob_get_contents();                                    
+                                    ob_end_clean();
+                                    $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html($coauthors)); 
+                                    echo $author. "<br> ";
+								    echo viral_news_post_date_no_div();		
+								  
 							?>
+							</span>
                             <?php //echo viral_news_post_date(); ?>
                         </div>
                     </div>
@@ -196,3 +214,110 @@ if (!function_exists('viral_news_post_date_raw')) :
     }
 
 endif;
+
+if (!function_exists('viral_news_site_logo')) {
+
+    function viral_news_site_logo() {
+        ?>
+        <div id="vn-site-branding">
+            <?php
+            if (function_exists('has_custom_logo') && has_custom_logo()) :
+                the_custom_logo();
+            else :
+                if (is_front_page()) :
+                    ?>
+                    <!--<h1 class="vn-site-title"><a href="<?php //echo esc_url(home_url('/')); ?>" rel="home"><?php //bloginfo('name'); ?></a></h1>-->
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><img src = "https://edition.samuelwang.tech/wp-content/uploads/2020/09/EditionHeader-1.png" style = "max-height:75px;"></img></a>
+                <?php else : ?>
+                    <!--<p class="vn-site-title"><a href="<?php //echo esc_url(home_url('/')); ?>" rel="home"><?php //bloginfo('name'); ?></a> </p>-->
+                    <p class="vn-site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home">  <img src = "https://edition.samuelwang.tech/wp-content/uploads/2020/09/EditionHeader-1.png" style = "max-height:75px;"></img></a> </p>
+                <?php endif; ?>
+                <!--<p class="vn-site-description"><a href="<?php// echo esc_url(home_url('/')); ?>" rel="home"><?php //bloginfo('description'); ?></a>Hello</p>-->
+                <?php endif; ?>
+        </div><!-- .site-branding -->
+        <?php
+    }
+
+}
+
+if (!function_exists('viral_news_social_links')) {
+
+    function viral_news_social_links() {
+        echo '<div class="vn-header-social-icons">';
+        $facebook = get_theme_mod('viral_news_social_facebook', '#');
+        $twitter = get_theme_mod('viral_news_social_twitter', '#');
+        $youtube = get_theme_mod('viral_news_social_youtube', '#');
+        $instagram = get_theme_mod('viral_news_social_instagram', '#');
+
+        if ($facebook)
+            echo '<a class="vn-facebook" href="' . esc_url($facebook) . '" target="_blank"><i class="mdi mdi-facebook"></i></a>';
+
+        if ($twitter)
+            echo '<a class="vn-twitter" href="' . esc_url($twitter) . '" target="_blank"><i class="mdi mdi-twitter"></i></a>';
+
+        if ($youtube)
+            echo '<a class="vn-youtube" href="' . esc_url($youtube) . '" target="_blank"><i class="mdi mdi-youtube" style = "color: #e04a4aff;"></i></a>';
+
+        if ($instagram)
+            echo '<a class="vn-instagram" href="' . esc_url($instagram) . '" target="_blank"><i class="mdi mdi-instagram" style = "color: #e04a4aff;"></i></a>';
+        echo '<a class="vn-email" href="mailto:theeditionga@gmail.com"><i class="mdi mdi-email" style = "color: #e04a4aff;"></i></a>';
+        echo '</div>';
+        //echo "<i class='material-icons large red-text'>room</i>";
+    }
+
+}
+
+function viral_news_custom_scripts(){
+    echo "<link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap' rel='stylesheet'>";
+    echo "<link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap' rel='stylesheet'>";
+    echo "<link href='https://fonts.googleapis.com/css2?family=Oswald&display=swap' rel='stylesheet'>";
+}
+
+add_action('wp_enqueue_scripts', 'viral_news_custom_scripts');
+
+if (!function_exists('viral_news_search_icon')) {
+
+    function viral_news_search_icon() {
+        echo '<div class="vn-header-search">';
+        echo '<a href="#"><i class="mdi mdi-magnify" style="color: #e04a4aff;"></i></a>';
+        echo '</div>';
+    }
+
+}
+
+function wptp_add_tags_to_attachments() {
+    register_taxonomy_for_object_type( 'post_tag', 'attachment' );
+}
+add_action( 'init' , 'wptp_add_tags_to_attachments' );
+
+
+function viral_news_posted_on() {
+
+    $posted_on = sprintf('<span class="vn-day">%1$s</span><span class="vn-month">%2$s</span>', esc_html(get_the_date('j')), esc_attr(get_the_date('M')));
+
+    $avatar = get_avatar(get_the_author_meta('ID'), 48);
+
+    $author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author()));
+
+    $comment_count = get_comments_number(); // get_comments_number returns only a numeric value
+
+    if ($comment_count == 0) {
+        $comments = esc_html__('No Comments', 'viral-news');
+    } elseif ($comment_count > 1) {
+        $comments = $comment_count . ' ' . esc_html__('Comments', 'viral-news');
+    } else {
+        $comments = esc_html__('1 Comment', 'viral-news');
+    }
+    echo '<span class="entry-date">' . $posted_on . '</span>';
+    $coauthors = get_coauthors();
+    foreach($coauthors as $coauthor){
+        $userdata = get_userdata( $coauthor->ID );
+        $avatar = get_avatar($coauthor->ID, 48);
+        $author = get_author_posts_url($coauthor->ID);
+        $name = $coauthor->display_name;
+        echo '<span class="entry-author"> ' . $avatar . '<span class="author"> <a href="' . $author . '">'. $name . '</a></span></span>';
+    }
+     
+    echo '<span class="entry-comment">' . $comments . '</span>'; // WPCS: XSS OK.
+}
+

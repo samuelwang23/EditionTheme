@@ -19,9 +19,9 @@
     
 }
 .sw-content{
-    width:60% !important;
-    margin-left:20% !important;
-    margin-right:20% !important;
+    width:80% !important;
+    margin-left:10% !important;
+    margin-right:10% !important;
     
 }
 
@@ -36,4 +36,77 @@
 }
 .sw-link:hover{
     color: #dd3333;
+}
+
+.Montserrat{
+    font-family: "Montserrat" !important;
+}
+
+.vn-post-title{
+    font-family: "Oswald" !important;
+}
+.sw-author{
+    font-family: "Montserrat" !important;
+    color: #345a96ff ;
+}
+p{
+    font-family: 'Georgia', serif !important;
+}
+
+.wp-block-media-text {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+body, button, input, select, textarea {
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.vn-site-title, .vn-main-navigation, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif !important;
+}
+
+
+.vn-main-navigation a{
+ font-family: "Montserrat", sans-serif !important;
+}
+.entry-title, h1{
+    font-family: "Oswald" !important;
+    text-transform: uppercase;
+}
+
+.sw-title{
+    color: #dd3333 !important;
+}
+
+.sw-title:hover{
+    color: red !important;
+}
+
+.vn-excerpt, .entry-content {
+    font-family: 'Cormorant Garamond';
+    font-size: 18px;
+}
+.vn-excerpt{
+    font-weight: bold;
+}
+
+.owl-prev, .owl-next{
+    opacity: 100 !important;
+}
+.vn-post-item h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.vn-top-block .post-categories li a {
+    display: block;
+    background: #0E0E0E;
+    color: #F0F0F0;
+    font-size: 15px;
+    padding: 4px 6px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-right: 4px;
+    margin-bottom: 4px;
 }

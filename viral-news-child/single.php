@@ -36,7 +36,7 @@ get_header();
 				<?php endif; ?>
                 <?php //viral_news_post_date(); ?>
 				<?php 
-					$avatar = get_avatar(get_the_author_meta('ID'), 48);
+					
 			
 					$author = sprintf(esc_html_x('By %s', 'post author', 'viral-news'), esc_html(get_the_author()));
 
@@ -55,11 +55,17 @@ get_header();
 					get_template_part('template-parts/content', 'single');
 					$time_to_read = max(1, floor(str_word_count(ob_get_contents())/$reading_speed)); // Store buffer in variable
 					ob_end_clean();
-					ob_start();
-					the_author_posts_link();
-					$author = ob_get_contents();
-					ob_end_clean();
-										echo  '<br><div><span class="entry-author"> ' . $avatar . '<span class="author"> ' . $author . '</span> -'. '<span>'.$posted_on. '</span></span> <em> '.$time_to_read.' minute read </em></div>'.'<span class="entry-comment"> '. $comments . '</span>'; // WPCS: XSS OK.
+					echo  '<br><div>';
+					$coauthors = get_coauthors();
+					foreach($coauthors as $coauthor){
+						$userdata = get_userdata( $coauthor->ID );
+						$avatar = get_avatar($coauthor->ID, 48);
+						$author = get_author_posts_url($coauthor->ID);
+						$name = $coauthor->display_name;
+						echo '<span class="entry-author"> ' . $avatar . '<span class="author"> <a href="' . $author . '">'. $name . '</a></span> ';
+					}
+					
+					echo '</span> -'. '<span>'.$posted_on. '</span> <em> '.$time_to_read.' minute read </em></div>'.'<span class="entry-comment"> '. $comments . '</span>'; // WPCS: XSS OK.
 				
 				?>
 				
